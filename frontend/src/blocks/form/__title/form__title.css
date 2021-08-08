@@ -1,0 +1,23 @@
+.form__title {
+    color: black;
+    width: 330px;
+    height: 23px;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    margin-top: 34px;
+    margin-bottom: 24px;
+    margin-left: 36px;
+    align-self: flex-start;
+}
+@media all and (max-width: 768px) {
+    .form__title {
+        width: 238px;
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 25px;
+        margin-left: 22px;
+        margin-bottom: 40px;
+    }
+}
+

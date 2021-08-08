@@ -1,0 +1,11 @@
+.profile__box {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+}
+@media all and (max-width: 1152px) {
+    .profile__box {
+        flex-direction: column;
+        align-self: center;
+    }
+}

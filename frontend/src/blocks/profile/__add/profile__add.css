@@ -1,0 +1,23 @@
+.profile__add {
+    background-image: url(../../../images/button.svg);
+    width: 150px;
+    height: 50px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+.profile__add:hover {
+    opacity: 0.6;
+    border: 2px solid #ffffff;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+@media all and (max-width: 1152px) {
+    .profile__add {
+        width: 282px;
+    }
+}

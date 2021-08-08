@@ -1,0 +1,13 @@
+.card__lists {
+    max-width: 246px;
+    background-color: #ffffff;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border-radius: 10px;
+    margin: 21px 25px 19px 25px;
+}
+

@@ -1,0 +1,15 @@
+.profile__text {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+}
+@media all and (max-width: 1152px) {
+    .profile__text {
+        width: 282px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

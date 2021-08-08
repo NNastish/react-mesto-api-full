@@ -1,0 +1,11 @@
+.profile__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+@media all and (max-width: 1152px) {
+    .profile__header {
+        justify-content: center;
+    }
+}

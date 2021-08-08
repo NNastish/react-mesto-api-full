@@ -1,0 +1,15 @@
+.profile__avatar {
+    cursor: pointer;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+@media all and (max-width: 1152px) {
+    .profile__avatar {
+        align-self: center;
+        margin: 0;
+    }
+}
