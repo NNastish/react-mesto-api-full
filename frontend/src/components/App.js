@@ -66,10 +66,8 @@ function App() {
     }
 
     function handleRegister(registration) {
-        // console.log(registration);
         auth.register(registration)
             .then(data => {
-                console.log(data);
                 setInfoToolTipData({
                     status: true,
                     isOpen: true
@@ -79,7 +77,7 @@ function App() {
                 //redirect to /signin
             })
             .catch(err => {
-                console.log(err)
+                showError(err)
                 setInfoToolTipData({
                     status: false,
                     isOpen: true
@@ -90,7 +88,6 @@ function App() {
     function handleLogin(login) {
         auth.login(login)
             .then(data => {
-                console.log(data);
                 if (data.token) {
                     localStorage.setItem('jwt', data.token);
                     setUserData(login.email)
@@ -99,7 +96,7 @@ function App() {
                 }
             })
             .catch(err => {
-                console.log(err);
+                showError(err);
                 setInfoToolTipData({
                     status: false,
                     isOpen: true,
@@ -125,7 +122,6 @@ function App() {
             .then(data => {
                 const refreshedCards = cards.filter(everyCard => everyCard._id !== card._id);
                 setCards(refreshedCards);
-                console.log(data);
             })
             .catch(showError);
     }
@@ -185,7 +181,7 @@ function App() {
     }
 
     function showError(error) {
-        console.log('Error: ' + error);
+        console.error('Error: ' + error);
     }
 
     function handleUpdateUser(formData) {
@@ -216,7 +212,6 @@ function App() {
 
     function handleAddPlace(card) {
         renderLoading({ flag: true, popup: 'addPlace'});
-        console.log(card);
         api.addCard(card)
             .then(newCard => {
                 // setCards([card, ...cards]);
