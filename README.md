@@ -3,5 +3,8 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-public ip = 84.201.128.18;
-домен = nastish.nomoredomains.monster;
+public ip = 84.201.128.18
+
+домен = nastish.nomoredomains.monster
+
+домен сервера = api.nastish.nomoredomains.monster
