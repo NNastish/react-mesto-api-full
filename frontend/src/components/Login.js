@@ -23,9 +23,9 @@ const Login = ({ handleLogin }) => {
         <form onSubmit={handleSubmit} className="authorization">
             <h2 className="authorization__title">Вход</h2>
             <input className="authorization__input" name="email" onChange={handleChange} value={login.email} type="email" placeholder="Email" minLength="2"
-                   required/>
+                   required autoComplete="username"/>
             <input className="authorization__input" name="password" onChange={handleChange} value={login.password} type="password" placeholder="Пароль"
-                   minLength="4" required/>
+                   minLength="4" required autoComplete="current-password"/>
             <button className="authorization__button" type="submit">Войти</button>
         </form>
     )
