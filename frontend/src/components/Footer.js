@@ -1,7 +1,3 @@
-{/*футер */}
-
-
-
 function Footer() {
     return (
         <section className="footer">

@@ -39,29 +39,52 @@ function App() {
 
     //Maybe move to MAIN
     useEffect(() => {
-        tokenCheck();
-        Promise.all([api.getUserInfo(), api.getInitialCards()])
-            .then(answer => {
-                setCurrentUser(answer[0]);
-                setCards(answer[1]);
-            })
-            .catch(error => {
-                showError(error);
-                setCurrentUser({});
-            })
-    }, [])
+        const hasToken = tokenCheck();
+        if (hasToken) {
+            Promise.all([api.getUserInfo(), api.getInitialCards()])
+                .then(answer => {
+                    setCurrentUser(answer[0]);
+                    const cardsAnswer = answer[1];
+                    reverseArray(cardsAnswer);
+                    setCards(cardsAnswer);
+                })
+                .catch(error => {
+                    showError(error);
+                    setCurrentUser({});
+                })
+        }
+    }, []);
 
-    function tokenCheck() {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-            auth.getContent(jwt).then((res) => {
-                if (res) {
-                    setLoggedIn(true);
-                    setUserData(res.data.email);
-                    history.push('/');
-                }
-            })
-                .catch(error => showError(error));
+    function reverseArray(array) {
+        let temp;
+        const tail = array.length - 1;
+        for (let i = 0; i < tail / 2; i++) {
+            temp = array[i];
+            array[i] = array[tail - i];
+            array[tail - i] = temp;
+        }
+    }
+
+    function promoteLogging(response) {
+        if (response) {
+            setLoggedIn(true);
+            setUserData(response.data.email);
+            history.push('/');
+            return true;
+        }
+        return false;
+    }
+
+    async function tokenCheck() {
+        try {
+            const jwt = localStorage.getItem('jwt');
+            if (jwt) {
+                const res = await auth.getContent(jwt);
+                return promoteLogging(res);
+            }
+            return false;
+        } catch (e) {
+            showError(e);
         }
     }
 

@@ -29,11 +29,11 @@ app.use(requestLogger);
 app.use(checkCors);
 
 // TODO: crashtest server
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+// app.get('/crash-test', () => {
+//   setTimeout(() => {
+//     throw new Error('Сервер сейчас упадёт');
+//   }, 0);
+// });
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -41,7 +41,7 @@ app.post('/signup', celebrate({
     password: Joi.string().required().min(8),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().required().pattern(url),
+    avatar: Joi.string().pattern(url),
   }),
 }), createUser);
 
@@ -68,3 +68,6 @@ app.use(errors());
 app.use(handleErrors);
 
 module.exports = app;
+// app.listen(PORT, () => {
+//   console.log(`listening on port ${PORT}`);
+// });
