@@ -34,26 +34,23 @@ function App() {
         isOpen: false
     });
 
-
     const history = useHistory();
 
-    //Maybe move to MAIN
     useEffect(() => {
-        const hasToken = tokenCheck();
-        if (hasToken) {
-            Promise.all([api.getUserInfo(), api.getInitialCards()])
-                .then(answer => {
-                    setCurrentUser(answer[0]);
-                    const cardsAnswer = answer[1];
-                    reverseArray(cardsAnswer);
-                    setCards(cardsAnswer);
-                })
-                .catch(error => {
-                    showError(error);
-                    setCurrentUser({});
-                })
-        }
+        tokenCheck();
+        Promise.all([api.getUserInfo(), api.getInitialCards()])
+            .then(answer => {
+                setCurrentUser(answer[0]);
+                const cardsAnswer = answer[1];
+                reverseArray(cardsAnswer);
+                setCards(cardsAnswer);
+            })
+            .catch(error => {
+                showError(error);
+                setCurrentUser({});
+            })
     }, []);
+
 
     function reverseArray(array) {
         let temp;
@@ -68,11 +65,9 @@ function App() {
     function promoteLogging(response) {
         if (response) {
             setLoggedIn(true);
-            setUserData(response.data.email);
+            setUserData(response.email);
             history.push('/');
-            return true;
         }
-        return false;
     }
 
     async function tokenCheck() {
@@ -80,9 +75,8 @@ function App() {
             const jwt = localStorage.getItem('jwt');
             if (jwt) {
                 const res = await auth.getContent(jwt);
-                return promoteLogging(res);
+                promoteLogging(res);
             }
-            return false;
         } catch (e) {
             showError(e);
         }
@@ -96,8 +90,6 @@ function App() {
                     isOpen: true
                 })
                 history.push('/sign-in');
-            //make popup about registration visible
-                //redirect to /signin
             })
             .catch(err => {
                 showError(err)
@@ -111,10 +103,16 @@ function App() {
     function handleLogin(login) {
         auth.login(login)
             .then(data => {
-                if (data.token) {
+                if (data) {
                     localStorage.setItem('jwt', data.token);
                     setUserData(login.email)
                     setLoggedIn(true);
+                    setCurrentUser({
+                        name: data.name,
+                        about: data.about,
+                        avatar: data.avatar,
+                        _id: data._id
+                    })
                     history.push('/');
                 }
             })

@@ -7,7 +7,6 @@ function Main({ onAddPlace, onEditAvatar, onEditProfile, onCardClick, cards, onC
     const currentUser = useContext(CurrentUserContext);
 
 
-
     return (
         <>
             {/*секция с профилем*/}

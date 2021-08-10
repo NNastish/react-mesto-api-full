@@ -21,7 +21,7 @@ class Api {
     }
 
     getUserInfo() {
-        const query = this._baseUrl + '/users/me';
+        const query = `${this._baseUrl}/users/me`;
         return fetch(query, {
             headers: {
                 authorization: this._headers.authorization

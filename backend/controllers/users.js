@@ -20,6 +20,7 @@ exports.getMyInfo = (req, res, next) => {
         name: user.name,
         about: user.about,
         avatar: user.avatar,
+        email: user.email,
         _id: user._id,
       });
     })
@@ -86,12 +87,19 @@ exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign(
+      const jwtToken = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : jwtDevelopment,
         { expiresIn: '7d' },
       );
-      res.send({ token });
+      res.send({
+        token: jwtToken,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        email: user.email,
+        _id: user._id,
+      });
     })
     .catch(next);
 };
