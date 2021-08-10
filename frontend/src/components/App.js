@@ -102,16 +102,16 @@ function App() {
 
     function handleLogin(login) {
         auth.login(login)
-            .then(data => {
-                if (data) {
-                    localStorage.setItem('jwt', data.token);
+            .then(response => {
+                if (response) {
+                    localStorage.setItem('jwt', response.token);
                     setUserData(login.email)
                     setLoggedIn(true);
                     setCurrentUser({
-                        name: data.name,
-                        about: data.about,
-                        avatar: data.avatar,
-                        _id: data._id
+                        name: response.name,
+                        about: response.about,
+                        avatar: response.avatar,
+                        _id: response._id
                     })
                     history.push('/');
                 }
@@ -209,7 +209,12 @@ function App() {
         renderLoading({flag: true, popup: 'profile'});
         api.editProfileInfo(formData)
             .then(response => {
-                setCurrentUser(response);
+                setCurrentUser({
+                    name: response.name,
+                    about: response.about,
+                    avatar: response.avatar,
+                    _id: response._id
+                });
                 closeAllPopups();
             })
             .catch(showError)
@@ -222,7 +227,13 @@ function App() {
         renderLoading({ flag: true, popup: 'avatar'});
         api.editAvatar(avatar)
             .then(response => {
-                setCurrentUser(response);
+                console.log(response);
+                setCurrentUser({
+                    name: response.name,
+                    about: response.about,
+                    avatar: response.avatar,
+                    _id: response._id
+                });
                 closeAllPopups();
             })
             .catch(showError)
@@ -235,7 +246,6 @@ function App() {
         renderLoading({ flag: true, popup: 'addPlace'});
         api.addCard(card)
             .then(newCard => {
-                // setCards([card, ...cards]);
                 setCards([newCard, ...cards]);
                 closeAllPopups();
             })
