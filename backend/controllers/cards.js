@@ -26,7 +26,7 @@ module.exports.createCard = async (req, res, next) => {
 // TODO: check if user has rights.
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.findById(cardId).orFail(new NotFoundError(cardNotFound))
+  Card.findById(cardId).populate('owner').orFail(new NotFoundError(cardNotFound))
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
         Card.findByIdAndRemove(cardId)
